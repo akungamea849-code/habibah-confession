@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Untuk Habibah ❤️</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 40px 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 90%;
+            position: relative;
+        }
+
+        h1 {
+            color: #d63384;
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+
+        p {
+            color: #555;
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            position: relative;
+            min-height: 50px;
+        }
+
+        button, .btn-wa {
+            padding: 12px 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: transform 0.2s, background-color 0.2s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        #btnMau {
+            background-color: #ff4b2b;
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 75, 43, 0.4);
+        }
+
+        #btnMau:hover {
+            transform: scale(1.1);
+            background-color: #ff416c;
+        }
+
+        #btnEngga {
+            background-color: #6c757d;
+            color: white;
+            position: absolute;
+            right: 20px;
+        }
+
+        /* Tombol Kirim WhatsApp */
+        .btn-wa {
+            background-color: #25d366;
+            color: white;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+            margin-top: 15px;
+        }
+
+        .btn-wa:hover {
+            transform: scale(1.05);
+            background-color: #20ba5a;
+        }
+
+        /* Tampilan saat Habibah klik "Mau" */
+        .pesan-sukses {
+            display: none;
+        }
+
+        .pesan-sukses h2 {
+            color: #d63384;
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .emoji {
+            font-size: 4rem;
+            margin-bottom: 15px;
+        }
+
+        /* Confetti Animation */
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background-color: #ff4b2b;
+            pointer-events: none;
+            animation: fall linear forwards;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <!-- Konten Utama -->
+        <div id="kontenAwal">
+            <div class="emoji">💖</div>
+            <h1>Halo Habibah...</h1>
+            <p>Aku mau jujur tentang perasaanku. Kamu mau ga jadi pacar aku?</p>
+            
+            <div class="btn-container">
+                <button id="btnMau" onclick="terima()">Mau ❤️</button>
+                <button id="btnEngga" onmouseover="kabur()" onclick="kabur()">Engga 😜</button>
+            </div>
+        </div>
+
+        <!-- Konten Setelah Mau Ditekan -->
+        <div id="pesanSukses" class="pesan-sukses">
+            <div class="emoji">🥰🎉</div>
+            <h2>Yeay! Makasih Habibah!</h2>
+            <p>Aku janji bakal bikin kamu bahagia terus! ❤️</p>
+            
+            <!-- Tombol Kirim WA -->
+            <a id="linkWA" href="#" target="_blank" class="btn-wa">Kabarim Aku di WA 💬</a>
+        </div>
+    </div>
+
+    <script>
+        // Ganti angka di bawah dengan nomor WhatsApp kamu (Gunakan awalan 62)
+        const nomorWA = "6282117316371"; 
+        const pesanWA = "Aku mau jadi pacar kamu! ❤️🥰";
+
+        function kabur() {
+            const btnEngga = document.getElementById('btnEngga');
+            
+            // Mengatur posisi tombol acak di area layar
+            const x = Math.random() * (window.innerWidth - btnEngga.offsetWidth - 40);
+            const y = Math.random() * (window.innerHeight - btnEngga.offsetHeight - 40);
+
+            btnEngga.style.position = 'fixed';
+            btnEngga.style.left = `${x}px`;
+            btnEngga.style.top = `${y}px`;
+        }
+
+        function createConfetti() {
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.backgroundColor = ['#ff4b2b', '#ff416c', '#d63384', '#25d366', '#ffd700'][Math.floor(Math.random() * 5)];
+                confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                document.body.appendChild(confetti);
+                
+                setTimeout(() => confetti.remove(), 4000);
+            }
+        }
+
+        function terima() {
+            document.getElementById('kontenAwal').style.display = 'none';
+            document.getElementById('pesanSukses').style.display = 'block';
+
+            // Menyiapkan link otomatis ke WhatsApp
+            const urlWA = `https://wa.me/${nomorWA}?text=${encodeURIComponent(pesanWA)}`;
+            document.getElementById('linkWA').href = urlWA;
+
+            // Tambah confetti
+            createConfetti();
+        }
+    </script>
+
+</body>
+</html>
